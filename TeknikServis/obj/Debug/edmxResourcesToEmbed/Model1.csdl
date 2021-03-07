@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="teknikservisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullaniciad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="sifre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="arizadetay">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="islem" Type="Int32" />
+    <Property Name="sorun" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="aciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="onfiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="netfiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="islemler" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cari">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="il" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="ilce" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="banka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vergidairesi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vergino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="statu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adres" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="faturabilgi" Relationship="Self.FK__faturabil__cariI__6FE99F9F" FromRole="cari" ToRole="faturabilgi" />
+    <NavigationProperty Name="urunkabul" Relationship="Self.FK__urunkabul__cariI__66603565" FromRole="cari" ToRole="urunkabul" />
+    <NavigationProperty Name="urunhareket" Relationship="Self.FK_urunhareket_cari" FromRole="cari" ToRole="urunhareket" />
+  </EntityType>
+  <EntityType Name="departman">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="aciklama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="personel" Relationship="Self.FK__personel__depart__5EBF139D" FromRole="departman" ToRole="personel" />
+  </EntityType>
+  <EntityType Name="faturabilgi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="seri" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="sirano" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="tarih" Type="DateTime" Precision="0" />
+    <Property Name="saat" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="vergidaire" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cariId" Type="Int32" />
+    <Property Name="personel" Type="Int32" />
+    <NavigationProperty Name="cari" Relationship="Self.FK__faturabil__cariI__6FE99F9F" FromRole="faturabilgi" ToRole="cari" />
+    <NavigationProperty Name="personel1" Relationship="Self.FK__faturabil__perso__70DDC3D8" FromRole="faturabilgi" ToRole="personel" />
+    <NavigationProperty Name="faturadetay" Relationship="Self.FK_faturadetay_faturabilgi" FromRole="faturabilgi" ToRole="faturadetay" />
+  </EntityType>
+  <EntityType Name="faturadetay">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="urun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adet" Type="Int16" />
+    <Property Name="fiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="tutar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="faturaId" Type="Int32" />
+    <NavigationProperty Name="faturabilgi" Relationship="Self.FK_faturadetay_faturabilgi" FromRole="faturadetay" ToRole="faturabilgi" />
+  </EntityType>
+  <EntityType Name="gider">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="gideraciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tarih" Type="DateTime" Precision="0" />
+    <Property Name="tutar" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="urun" Relationship="Self.FK__urun__kategoriId__4BAC3F29" FromRole="kategori" ToRole="urun" />
+  </EntityType>
+  <EntityType Name="notlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="baslik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="icerik" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="durum" Type="Boolean" />
+    <Property Name="tarih" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="personel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="departmanid" Type="Int32" />
+    <Property Name="fotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="departman" Relationship="Self.FK__personel__depart__5EBF139D" FromRole="personel" ToRole="departman" />
+    <NavigationProperty Name="faturabilgi" Relationship="Self.FK__faturabil__perso__70DDC3D8" FromRole="personel" ToRole="faturabilgi" />
+    <NavigationProperty Name="urunhareket" Relationship="Self.FK__urunharek__perso__7D439ABD" FromRole="personel" ToRole="urunhareket" />
+    <NavigationProperty Name="urunkabul" Relationship="Self.FK__urunkabul__perso__6754599E" FromRole="personel" ToRole="urunkabul" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="urun">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="marka" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="alisfiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="satisfiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="stok" Type="Int16" />
+    <Property Name="kategoriId" Type="Int32" />
+    <Property Name="durum" Type="Boolean" />
+    <NavigationProperty Name="kategori" Relationship="Self.FK__urun__kategoriId__4BAC3F29" FromRole="urun" ToRole="kategori" />
+    <NavigationProperty Name="urunhareket" Relationship="Self.FK__urunharek__urunI__7C4F7684" FromRole="urun" ToRole="urunhareket" />
+  </EntityType>
+  <EntityType Name="urunhareket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="urunId" Type="Int32" />
+    <Property Name="musteri" Type="Int32" />
+    <Property Name="personelId" Type="Int32" />
+    <Property Name="tarih" Type="DateTime" Precision="0" />
+    <Property Name="adet" Type="Int16" />
+    <Property Name="fiyat" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="cari" Relationship="Self.FK_urunhareket_cari" FromRole="urunhareket" ToRole="cari" />
+    <NavigationProperty Name="personel" Relationship="Self.FK__urunharek__perso__7D439ABD" FromRole="urunhareket" ToRole="personel" />
+    <NavigationProperty Name="urun" Relationship="Self.FK__urunharek__urunI__7C4F7684" FromRole="urunhareket" ToRole="urun" />
+    <Property Name="urunserino" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="urunkabul">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cariId" Type="Int32" />
+    <Property Name="personelId" Type="Int32" />
+    <Property Name="gelistarih" Type="DateTime" Precision="0" />
+    <Property Name="cikistarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="cari" Relationship="Self.FK__urunkabul__cariI__66603565" FromRole="urunkabul" ToRole="cari" />
+    <NavigationProperty Name="personel" Relationship="Self.FK__urunkabul__perso__6754599E" FromRole="urunkabul" ToRole="personel" />
+    <Property Name="urunserino" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="uruntakip">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tarih" Type="DateTime" Precision="0" />
+    <Property Name="aciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="serino" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__faturabil__cariI__6FE99F9F">
+    <End Role="cari" Type="Self.cari" Multiplicity="0..1" />
+    <End Role="faturabilgi" Type="Self.faturabilgi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cari">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="faturabilgi">
+        <PropertyRef Name="cariId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunkabul__cariI__66603565">
+    <End Role="cari" Type="Self.cari" Multiplicity="0..1" />
+    <End Role="urunkabul" Type="Self.urunkabul" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cari">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunkabul">
+        <PropertyRef Name="cariId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_urunhareket_cari">
+    <End Role="cari" Type="Self.cari" Multiplicity="0..1" />
+    <End Role="urunhareket" Type="Self.urunhareket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cari">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunhareket">
+        <PropertyRef Name="musteri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__personel__depart__5EBF139D">
+    <End Role="departman" Type="Self.departman" Multiplicity="0..1" />
+    <End Role="personel" Type="Self.personel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departman">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="personel">
+        <PropertyRef Name="departmanid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__faturabil__perso__70DDC3D8">
+    <End Role="personel" Type="Self.personel" Multiplicity="0..1" />
+    <End Role="faturabilgi" Type="Self.faturabilgi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="faturabilgi">
+        <PropertyRef Name="personel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_faturadetay_faturabilgi">
+    <End Role="faturabilgi" Type="Self.faturabilgi" Multiplicity="0..1" />
+    <End Role="faturadetay" Type="Self.faturadetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="faturabilgi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="faturadetay">
+        <PropertyRef Name="faturaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urun__kategoriId__4BAC3F29">
+    <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+    <End Role="urun" Type="Self.urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urun">
+        <PropertyRef Name="kategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunharek__perso__7D439ABD">
+    <End Role="personel" Type="Self.personel" Multiplicity="0..1" />
+    <End Role="urunhareket" Type="Self.urunhareket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunhareket">
+        <PropertyRef Name="personelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunkabul__perso__6754599E">
+    <End Role="personel" Type="Self.personel" Multiplicity="0..1" />
+    <End Role="urunkabul" Type="Self.urunkabul" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunkabul">
+        <PropertyRef Name="personelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunharek__urunI__7C4F7684">
+    <End Role="urun" Type="Self.urun" Multiplicity="0..1" />
+    <End Role="urunhareket" Type="Self.urunhareket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urun">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunhareket">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="teknikservisEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admin" EntityType="Self.admin" />
+    <EntitySet Name="arizadetay" EntityType="Self.arizadetay" />
+    <EntitySet Name="cari" EntityType="Self.cari" />
+    <EntitySet Name="departman" EntityType="Self.departman" />
+    <EntitySet Name="faturabilgi" EntityType="Self.faturabilgi" />
+    <EntitySet Name="faturadetay" EntityType="Self.faturadetay" />
+    <EntitySet Name="gider" EntityType="Self.gider" />
+    <EntitySet Name="kategori" EntityType="Self.kategori" />
+    <EntitySet Name="notlar" EntityType="Self.notlar" />
+    <EntitySet Name="personel" EntityType="Self.personel" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="urun" EntityType="Self.urun" />
+    <EntitySet Name="urunhareket" EntityType="Self.urunhareket" />
+    <EntitySet Name="urunkabul" EntityType="Self.urunkabul" />
+    <EntitySet Name="uruntakip" EntityType="Self.uruntakip" />
+    <AssociationSet Name="FK__faturabil__cariI__6FE99F9F" Association="Self.FK__faturabil__cariI__6FE99F9F">
+      <End Role="cari" EntitySet="cari" />
+      <End Role="faturabilgi" EntitySet="faturabilgi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunkabul__cariI__66603565" Association="Self.FK__urunkabul__cariI__66603565">
+      <End Role="cari" EntitySet="cari" />
+      <End Role="urunkabul" EntitySet="urunkabul" />
+    </AssociationSet>
+    <AssociationSet Name="FK_urunhareket_cari" Association="Self.FK_urunhareket_cari">
+      <End Role="cari" EntitySet="cari" />
+      <End Role="urunhareket" EntitySet="urunhareket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__personel__depart__5EBF139D" Association="Self.FK__personel__depart__5EBF139D">
+      <End Role="departman" EntitySet="departman" />
+      <End Role="personel" EntitySet="personel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__faturabil__perso__70DDC3D8" Association="Self.FK__faturabil__perso__70DDC3D8">
+      <End Role="personel" EntitySet="personel" />
+      <End Role="faturabilgi" EntitySet="faturabilgi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_faturadetay_faturabilgi" Association="Self.FK_faturadetay_faturabilgi">
+      <End Role="faturabilgi" EntitySet="faturabilgi" />
+      <End Role="faturadetay" EntitySet="faturadetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urun__kategoriId__4BAC3F29" Association="Self.FK__urun__kategoriId__4BAC3F29">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="urun" EntitySet="urun" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunharek__perso__7D439ABD" Association="Self.FK__urunharek__perso__7D439ABD">
+      <End Role="personel" EntitySet="personel" />
+      <End Role="urunhareket" EntitySet="urunhareket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunkabul__perso__6754599E" Association="Self.FK__urunkabul__perso__6754599E">
+      <End Role="personel" EntitySet="personel" />
+      <End Role="urunkabul" EntitySet="urunkabul" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunharek__urunI__7C4F7684" Association="Self.FK__urunharek__urunI__7C4F7684">
+      <End Role="urun" EntitySet="urun" />
+      <End Role="urunhareket" EntitySet="urunhareket" />
+    </AssociationSet>
+    <FunctionImport Name="urunkategori" ReturnType="Collection(teknikservisModel.urunkategori_Result)" />
+    <EntitySet Name="iletisim" EntityType="teknikservisModel.iletisim" />
+  </EntityContainer>
+  <ComplexType Name="urunkategori_Result">
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Adet" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="iletisim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adsoyad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mail" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="konu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

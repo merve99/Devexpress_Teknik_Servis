@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="teknikservisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kullaniciad" Type="varchar" MaxLength="10" />
+    <Property Name="sifre" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="arizadetay">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="islem" Type="int" />
+    <Property Name="sorun" Type="varchar" MaxLength="250" />
+    <Property Name="aciklama" Type="varchar" MaxLength="250" />
+    <Property Name="onfiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="netfiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="islemler" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="cari">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="30" />
+    <Property Name="soyad" Type="varchar" MaxLength="30" />
+    <Property Name="telefon" Type="varchar" MaxLength="20" />
+    <Property Name="mail" Type="varchar" MaxLength="50" />
+    <Property Name="il" Type="varchar" MaxLength="13" />
+    <Property Name="ilce" Type="varchar" MaxLength="30" />
+    <Property Name="banka" Type="varchar" MaxLength="50" />
+    <Property Name="vergidairesi" Type="varchar" MaxLength="50" />
+    <Property Name="vergino" Type="varchar" MaxLength="50" />
+    <Property Name="statu" Type="varchar" MaxLength="50" />
+    <Property Name="adres" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="departman">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="50" />
+    <Property Name="aciklama" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="faturabilgi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="seri" Type="char" MaxLength="1" />
+    <Property Name="sirano" Type="varchar" MaxLength="8" />
+    <Property Name="tarih" Type="smalldatetime" />
+    <Property Name="saat" Type="char" MaxLength="5" />
+    <Property Name="vergidaire" Type="varchar" MaxLength="50" />
+    <Property Name="cariId" Type="int" />
+    <Property Name="personel" Type="int" />
+  </EntityType>
+  <EntityType Name="faturadetay">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urun" Type="varchar" MaxLength="50" />
+    <Property Name="adet" Type="smallint" />
+    <Property Name="fiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="tutar" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="faturaId" Type="int" />
+  </EntityType>
+  <EntityType Name="gider">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gideraciklama" Type="varchar" MaxLength="50" />
+    <Property Name="tarih" Type="smalldatetime" />
+    <Property Name="tutar" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="iletisim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adsoyad" Type="varchar" MaxLength="100" />
+    <Property Name="mail" Type="varchar" MaxLength="70" />
+    <Property Name="konu" Type="varchar" MaxLength="50" />
+    <Property Name="mesaj" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="notlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="baslik" Type="varchar" MaxLength="50" />
+    <Property Name="icerik" Type="varchar" MaxLength="500" />
+    <Property Name="durum" Type="bit" />
+    <Property Name="tarih" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="personel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="30" />
+    <Property Name="soyad" Type="varchar" MaxLength="30" />
+    <Property Name="departmanid" Type="int" />
+    <Property Name="fotograf" Type="varchar" MaxLength="100" />
+    <Property Name="mail" Type="varchar" MaxLength="50" />
+    <Property Name="telefon" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="urun">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="30" />
+    <Property Name="marka" Type="varchar" MaxLength="30" />
+    <Property Name="alisfiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="satisfiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="stok" Type="smallint" />
+    <Property Name="kategoriId" Type="int" />
+    <Property Name="durum" Type="bit" />
+  </EntityType>
+  <EntityType Name="urunhareket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunId" Type="int" />
+    <Property Name="musteri" Type="int" />
+    <Property Name="personelId" Type="int" />
+    <Property Name="tarih" Type="smalldatetime" />
+    <Property Name="adet" Type="smallint" />
+    <Property Name="fiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="urunserino" Type="char" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="urunkabul">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cariId" Type="int" />
+    <Property Name="personelId" Type="int" />
+    <Property Name="gelistarih" Type="smalldatetime" />
+    <Property Name="cikistarih" Type="smalldatetime" />
+    <Property Name="urunserino" Type="char" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="uruntakip">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aciklama" Type="varchar" MaxLength="250" />
+    <Property Name="tarih" Type="smalldatetime" />
+    <Property Name="serino" Type="char" MaxLength="5" />
+  </EntityType>
+  <Association Name="FK__faturabil__cariI__6FE99F9F">
+    <End Role="cari" Type="Self.cari" Multiplicity="0..1" />
+    <End Role="faturabilgi" Type="Self.faturabilgi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cari">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="faturabilgi">
+        <PropertyRef Name="cariId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__faturabil__perso__70DDC3D8">
+    <End Role="personel" Type="Self.personel" Multiplicity="0..1" />
+    <End Role="faturabilgi" Type="Self.faturabilgi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="faturabilgi">
+        <PropertyRef Name="personel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__personel__depart__5EBF139D">
+    <End Role="departman" Type="Self.departman" Multiplicity="0..1" />
+    <End Role="personel" Type="Self.personel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departman">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="personel">
+        <PropertyRef Name="departmanid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urun__kategoriId__4BAC3F29">
+    <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+    <End Role="urun" Type="Self.urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urun">
+        <PropertyRef Name="kategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunharek__perso__7D439ABD">
+    <End Role="personel" Type="Self.personel" Multiplicity="0..1" />
+    <End Role="urunhareket" Type="Self.urunhareket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunhareket">
+        <PropertyRef Name="personelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunharek__urunI__7C4F7684">
+    <End Role="urun" Type="Self.urun" Multiplicity="0..1" />
+    <End Role="urunhareket" Type="Self.urunhareket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urun">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunhareket">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunkabul__cariI__66603565">
+    <End Role="cari" Type="Self.cari" Multiplicity="0..1" />
+    <End Role="urunkabul" Type="Self.urunkabul" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cari">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunkabul">
+        <PropertyRef Name="cariId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__urunkabul__perso__6754599E">
+    <End Role="personel" Type="Self.personel" Multiplicity="0..1" />
+    <End Role="urunkabul" Type="Self.urunkabul" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunkabul">
+        <PropertyRef Name="personelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_faturadetay_faturabilgi">
+    <End Role="faturabilgi" Type="Self.faturabilgi" Multiplicity="0..1" />
+    <End Role="faturadetay" Type="Self.faturadetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="faturabilgi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="faturadetay">
+        <PropertyRef Name="faturaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_urunhareket_cari">
+    <End Role="cari" Type="Self.cari" Multiplicity="0..1" />
+    <End Role="urunhareket" Type="Self.urunhareket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cari">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="urunhareket">
+        <PropertyRef Name="musteri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="urunkategori" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="teknikservisModelStoreContainer">
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="arizadetay" EntityType="Self.arizadetay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cari" EntityType="Self.cari" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="departman" EntityType="Self.departman" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="faturabilgi" EntityType="Self.faturabilgi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="faturadetay" EntityType="Self.faturadetay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gider" EntityType="Self.gider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iletisim" EntityType="Self.iletisim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kategori" EntityType="Self.kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="notlar" EntityType="Self.notlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="personel" EntityType="Self.personel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="urun" EntityType="Self.urun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="urunhareket" EntityType="Self.urunhareket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="urunkabul" EntityType="Self.urunkabul" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uruntakip" EntityType="Self.uruntakip" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__faturabil__cariI__6FE99F9F" Association="Self.FK__faturabil__cariI__6FE99F9F">
+      <End Role="cari" EntitySet="cari" />
+      <End Role="faturabilgi" EntitySet="faturabilgi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__faturabil__perso__70DDC3D8" Association="Self.FK__faturabil__perso__70DDC3D8">
+      <End Role="personel" EntitySet="personel" />
+      <End Role="faturabilgi" EntitySet="faturabilgi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__personel__depart__5EBF139D" Association="Self.FK__personel__depart__5EBF139D">
+      <End Role="departman" EntitySet="departman" />
+      <End Role="personel" EntitySet="personel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urun__kategoriId__4BAC3F29" Association="Self.FK__urun__kategoriId__4BAC3F29">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="urun" EntitySet="urun" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunharek__perso__7D439ABD" Association="Self.FK__urunharek__perso__7D439ABD">
+      <End Role="personel" EntitySet="personel" />
+      <End Role="urunhareket" EntitySet="urunhareket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunharek__urunI__7C4F7684" Association="Self.FK__urunharek__urunI__7C4F7684">
+      <End Role="urun" EntitySet="urun" />
+      <End Role="urunhareket" EntitySet="urunhareket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunkabul__cariI__66603565" Association="Self.FK__urunkabul__cariI__66603565">
+      <End Role="cari" EntitySet="cari" />
+      <End Role="urunkabul" EntitySet="urunkabul" />
+    </AssociationSet>
+    <AssociationSet Name="FK__urunkabul__perso__6754599E" Association="Self.FK__urunkabul__perso__6754599E">
+      <End Role="personel" EntitySet="personel" />
+      <End Role="urunkabul" EntitySet="urunkabul" />
+    </AssociationSet>
+    <AssociationSet Name="FK_faturadetay_faturabilgi" Association="Self.FK_faturadetay_faturabilgi">
+      <End Role="faturabilgi" EntitySet="faturabilgi" />
+      <End Role="faturadetay" EntitySet="faturadetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_urunhareket_cari" Association="Self.FK_urunhareket_cari">
+      <End Role="cari" EntitySet="cari" />
+      <End Role="urunhareket" EntitySet="urunhareket" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
